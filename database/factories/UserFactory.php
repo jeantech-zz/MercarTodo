@@ -23,16 +23,29 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
+    public function unverified(): Factory
     {
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
+            ];
+        });
+    }
+
+    public function disabled(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'disabled_at' => now(),
+            ];
+        });
+    }
+
+    public function enabled(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'disabled_at' => null,
             ];
         });
     }
