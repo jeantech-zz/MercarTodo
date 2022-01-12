@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Filters\Concerns\HasFilters;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -17,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasEnabledStatus;
+    use HasFilters;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +30,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'phone_number',
+        'address',
+        'rol_id'
     ];
 
     /**
@@ -48,7 +54,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function email(): string
+    /*public function email(): string
+    {
+        return $this->attributes['email'];
+        // strtolower( $this->email);
+    }*/
+
+    public function emailLogin(): string
     {
         return strtolower( $this->email);
     }
