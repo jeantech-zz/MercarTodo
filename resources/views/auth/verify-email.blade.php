@@ -1,5 +1,5 @@
 @extends('layouts.app')
-sssfff
+@extends('layouts.home')
 @section('content')
     <div class="card mt-6">
         <div class="card-content">

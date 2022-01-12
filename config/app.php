@@ -176,6 +176,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyViewsServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
+        
+        App\Providers\ModelFilterProvider::class,
+        App\Providers\ViewServiceProvider::class,
 
     ],
 

@@ -17,7 +17,7 @@
                         <p class="menu-label">@lang('menu.security')</p>
                         <ul class="menu-list">
                             <li><a href=""><em class="pr-2 mdi mdi-shield-lock"></em>permissions</a></li>
-                            <li><a href=""><em class="pr-2 mdi mdi-account-multiple"></em>Users</a></li>
+                            <li><a href="{{ route('users.index') }}"><em class="pr-2 mdi mdi-account-multiple"></em>Users</a></li>
                         </ul>
 
                         <p class="menu-label">@lang('menu.system')</p>

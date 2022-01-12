@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     {{ session('status') }}
-                    {{ __('You are logged inss!') }}
+                    
                     @extends('layouts.admin')
                 </div>
             </div>
