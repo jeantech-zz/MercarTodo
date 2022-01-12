@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Exceptions\UserDisabledException;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,7 +27,8 @@ class AuthenticationTest extends TestCase
 
     public function test_it_can_login_user(): void 
     {
-       $user = $this->enabledUser(['email' => 'jeante05@gmail.com']);
+      $user = $this->enabledUser(['email' => 'jeante05@gmail.com']);
+      // $user = $this->user(['email' => 'jeante05@gmail.com']);
         
         $response = $this->post('/login', ['email' => $user->email(), 'password' => 'password' ]);
  
@@ -44,5 +46,18 @@ class AuthenticationTest extends TestCase
         $response->assertSessionHasErrors('email');
         $this->assertNull(Auth::user());
 
+    }
+
+    public function test_it_disabled_user_cant_login(): void 
+    {
+        $this->expectException(UserDisabledException::class);
+        $this->withoutExceptionHandling();
+
+        $user = $this->disabledUser(['email' => 'jeante05@gmail.com']);
+        $response = $this->post('/login', ['email' =>  $user->email(), 'password' => 'password' ]);
+
+        $this->assertNull(Auth::user());
+        //$response->assertSessionHasErrors('email');
+       // $response->assertSee(trans('auth.user_blocked'));
     }
 }
