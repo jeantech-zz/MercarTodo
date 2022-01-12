@@ -53,6 +53,11 @@ class User extends Authenticatable
         return strtolower( $this->email);
     }
 
+    public function password(): string
+    {
+        return $this->attributes['password'];
+    }
+
     /*public function isEnabled(): bool
     {
         return ! (bool) $this->isDisabled();

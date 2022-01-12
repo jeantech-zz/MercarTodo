@@ -7,6 +7,8 @@
                     {{ session('status') }}
                 </div>
             @endif
+
+            @includeWhen(session()->has('disabled'), 'auth.partials.user_blocked')
             <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <b-field label="{{ __('Email') }}"
