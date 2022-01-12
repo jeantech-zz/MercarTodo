@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Concerns\HasEnabledStatus;
 
-class User extends Authenticatable
+/**
+ * @property string $email
+ */
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasEnabledStatus;
 
     /**
      * The attributes that are mass assignable.
@@ -41,4 +47,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function email(): string
+    {
+        return strtolower( $this->email);
+    }
+
+    public function password(): string
+    {
+        return $this->attributes['password'];
+    }
+
+    /*public function isEnabled(): bool
+    {
+        return ! (bool) $this->isDisabled();
+    }
+
+    public function isDisabled(): bool
+    {
+        return  (bool) $this->disabled_at;
+    }*/
 }
