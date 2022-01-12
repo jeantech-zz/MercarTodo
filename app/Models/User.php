@@ -13,7 +13,7 @@ use App\Models\Concerns\HasEnabledStatus;
  * @property string $email
  */
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasEnabledStatus;

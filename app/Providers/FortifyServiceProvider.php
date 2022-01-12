@@ -27,17 +27,6 @@ class FortifyServiceProvider extends ServiceProvider
             return (new AuthenticateUser())->authenticates($request);
         });
         
-      /*  Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('email', $request->input('email'))->first();
-    
-            if ($user &&
-                Hash::check($request->input('password'), $user->password()) && 
-                $user->isEnabled()) {
-                return $user;
-            }
-            return null;
-        });*/
-
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;
 
