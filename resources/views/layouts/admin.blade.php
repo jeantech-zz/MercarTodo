@@ -10,7 +10,7 @@
                     <aside class="menu">
                         <p class="menu-label">@lang('menu.administration')</p>
                         <ul class="menu-list">
-                            <li><a href=""><em class="pr-2 mdi mdi-map-legend"></em>Products</a></li>
+                            <li><a href="{{ route('products.index') }}"><em class="pr-2 mdi mdi-map-legend"></em>Products</a></li>
                             <li><a href=""><em class="pr-2 mdi mdi-currency-usd"></em>Reports</a></li>
                         </ul>
 

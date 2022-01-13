@@ -237,4 +237,6 @@ return [
 
     ],
 
+    'urlProduct' => env('URL_PRODUCT', 'public/product'),
+
 ];

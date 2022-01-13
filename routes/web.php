@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;  
+use App\Http\Controllers\Product\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,6 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::Resource('users', UserController::class)->only(['index','create','store','edit','update']);
+    Route::Resource('products', ProductController::class)->only(['index','create','store','edit', 'update']);
+ 
 });
