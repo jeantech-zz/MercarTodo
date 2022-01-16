@@ -56,15 +56,12 @@ class ProductController extends Controller
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function store(CreateRequest $request): RedirectResponse
-    {
-  
+    {  
         $urlProduct = config('app.urlProduct');
-
         
         if(is_object($request->file('image'))) {
             $imagen = $request->file('image')->store($urlProduct);
             $url = Storage::url($imagen);
-          //  dd($request->file('image'), $urlProduct, $imagen, $url);
         }else{
             $url = $request->image;
         }
@@ -82,7 +79,6 @@ class ProductController extends Controller
 
     public function update (UpdateRequest $request): RedirectResponse
     {
-        //dd($request);
         $urlProduct = config('app.urlProduct');
 
         if(is_object($request->file('image'))) {
@@ -91,7 +87,6 @@ class ProductController extends Controller
         }else{
             $url = $request->image;
         }
-
 
         $product = UpdateActions::execute($request->validated(),  $url );
         return redirect()->route('products.index')->with('success', 'Product Update successfully.');

@@ -1,5 +1,7 @@
-@extends('layouts.client')
+@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
+
 <table class="table is-narrow is-hoverable is-fullwidth">
     <caption class="is-hidden">{{ $texts['title'] }}</caption>
     <thead>
@@ -19,10 +21,12 @@
     <tbody>
     @foreach($products as $product)
         <tr>
+            <td>{{ $product->code }}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->description }}</td>
             <td>{{ $product->price }}</td>
-            <td><img src="{{ $product->image }}"/></td>
+            <td>{{ $product->quantity }}</td>
+            <td><img src="{{ $product->image }}" width="60" height="60" /></td>
         </tr>
     @endforeach
     </tbody>
