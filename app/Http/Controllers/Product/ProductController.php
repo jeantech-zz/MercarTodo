@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Actions\Product\CreateActions;
 use App\Actions\Product\UpdateActions;
-use App\Actions\Product\DeleteActions;
+use App\Actions\Product\DisableActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\IndexRequest;
 use App\Http\Requests\Product\CreateRequest;
@@ -95,10 +95,16 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product Update successfully.');
     }
 
-    public function destroy(int $id): RedirectResponse
+    public function destroy(Product $product): RedirectResponse
     {
-        $product = DeleteActions::execute($id);
+        $product->delete();
         return redirect()->route('products.index')->with('success', 'Product Delete successfully.');
     
+    }
+
+    public function disable (Product $product): RedirectResponse
+    {
+        $product = DisableActions::execute($product);
+        return redirect()->route('products.index')->with('success', 'Product Update successfully.');
     }
 }

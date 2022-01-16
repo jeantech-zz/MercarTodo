@@ -28,9 +28,15 @@
                 <a href="{{ route('users.edit', ['user' => $user]) }}">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                     </a>
-                <button class="button is-success" type="submit" form="submit"><em class="fas fa-save mr-2"></em>
-                        @lang('users.buttons.disable')
-                    </button
+
+                <botton-component>
+                    @csrf
+                    @method('PUT')
+                    <button v-on:click="$emit('botton-item', { route: '{{ route('users.disable', $user ) }}' })" class="button is-success"> @lang('users.buttons.disable') </button>  
+                </botton-component> 
+
+                     
+                </from>
             </td>
         </tr>
     @endforeach

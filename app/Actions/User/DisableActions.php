@@ -8,14 +8,12 @@ use App\Models\User;
 
 class DisableActions
 {
-    public static function execute(int $id): User
+    public static function execute(User $user)
     {
        
-        $record = User::find($id);
-
-            $record->update([ 
-                'disable_at' => date("Y-m-d H:i:s")  
-            ]);
+        $record= $user->update([ 
+            'disabled_at' =>  now()
+        ]);
 
         return $record;
     }

@@ -20,7 +20,8 @@ return [
     'buttons' => [
         'save' => 'Create Product',
         'cancel' => 'Cancel Product',
-        'delete' => 'delete'
+        'delete' => 'Delete',
+        'disable' => 'Disable'
     ],
     'message' => [
         'success' => 'created successfully.',

@@ -31,12 +31,25 @@
             <td class="has-text-centered">
                <a href="{{ route('products.edit', ['product' => $product]) }}">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
-                    </a>
-            
+                </a>
+                <botton-component>
+                    @csrf
+                    @method('DELETE')
+                    <button v-on:click="$emit('botton-item', { route: '{{ route('products.destroy', $product ) }}' })" class="button is-danger"> @lang('products.buttons.delete') </button>  
+                </botton-component> 
+               
+                <botton-component>
+                    @csrf
+                    @method('PUT')
+                    <button v-on:click="$emit('botton-item', { route: '{{ route('products.disable', $product ) }}' })" class="button is-success"> @lang('products.buttons.disable') </button>  
+                </botton-component> 
+
+               
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+
 {{ $products->appends(request()->only('filters'))->render('partials.pagination.paginator') }}
 @endsection
