@@ -237,6 +237,6 @@ return [
 
     ],
 
-    'urlProduct' => env('URL_PRODUCT', 'public/product'),
+    'urlProduct' => env('URL_PRODUCT', 'public/products'),
 
 ];

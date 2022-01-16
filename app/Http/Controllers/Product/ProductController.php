@@ -60,9 +60,11 @@ class ProductController extends Controller
   
         $urlProduct = config('app.urlProduct');
 
+        
         if(is_object($request->file('image'))) {
             $imagen = $request->file('image')->store($urlProduct);
             $url = Storage::url($imagen);
+          //  dd($request->file('image'), $urlProduct, $imagen, $url);
         }else{
             $url = $request->image;
         }
