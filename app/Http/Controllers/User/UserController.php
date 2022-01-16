@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\User\CreateActions;
 use App\Actions\User\UpdateActions;
+use App\Actions\User\DisableActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\IndexRequest;
 use App\Http\Requests\User\CreateRequest;
@@ -61,11 +62,11 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User Update successfully.');
     }
 
-    public function disable(int $id): RedirectResponse
+    public function disable(User $user): RedirectResponse
     {
-        $user = DisableActions::execute($id);
+        $user = DisableActions::execute($user);
 
-        return redirect()->route('user.index')->with('success', 'User disable successfully.');
+        return redirect()->route('users.index')->with('success', 'User disable successfully.');
     }
 
 

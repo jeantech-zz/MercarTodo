@@ -28,6 +28,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::Resource('users', UserController::class)->only(['index','create','store','edit','update']);
-    Route::Resource('products', ProductController::class)->only(['index','create','store','edit', 'update']);
- 
+    Route::Resource('products', ProductController::class)->only(['index','create','store','edit', 'update','destroy']);
+    
+    Route::put('/products/disable/{product}', [ProductController::class, 'disable'])->name('products.disable');
+    Route::put('/users/disable/{user}', [UserController::class, 'disable'])->name('users.disable');
 });
