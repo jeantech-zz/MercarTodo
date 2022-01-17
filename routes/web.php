@@ -39,5 +39,6 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::GET('products/indexClient',[ProductController::class,'indexClient'])->name('products.indexClient');
 
     Route::post('/products/addProductOrder/{product}', [ProductController::class, 'addProductOrder'])->name('products.addProductOrder');
+    Route::post('/orderProducts/addProductOrder/{orderProduct}', [OrderProductController::class, 'addProductOrder'])->name('orderProducts.addProductOrder');
 
 });

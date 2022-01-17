@@ -29,6 +29,12 @@
                <a href="">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                 </a>    
+                <form action="{{ route('orderProducts.addProductOrder', $orderProduct) }}" method="post">
+                    @csrf
+                    <button class="button is-primary is-fullwidth" type="submit" ><em class="fas fa-save mr-2"></em>
+                            @lang('orderProducts.buttons.agregar')
+                    </button>
+                </from>
                 <botton-component>
                     @csrf
                     @method('DELETE')
