@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;  
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Order\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::Resource('users', UserController::class)->only(['index','create','store','edit','update']);
     Route::Resource('products', ProductController::class)->only(['index','create','store','edit', 'update','destroy']);
+    Route::Resource('orders', OrderController::class)->only(['index','destroy']);
     
     Route::put('/products/disable/{product}', [ProductController::class, 'disable'])->name('products.disable');
     Route::put('/users/disable/{user}', [UserController::class, 'disable'])->name('users.disable');
