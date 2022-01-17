@@ -24,23 +24,23 @@
             <td>{{ $orderProduct->product_id }}</td>
             <td>{{ $orderProduct->quantity }}</td>
             <td>{{ $orderProduct->amount }}</td>
-            <td>{{ $orderProduct->order_id }}</td>
-            <td class="has-text-centered">    
-                
+            <td>{{ $orderProduct->order_id }}</td>  
+            
+            <td>
                 <botton-component>
                     @csrf
                     <button v-on:click="$emit('botton-item', { route: '{{ route('orderProducts.addProductOrder', $orderProduct) }}' })" class="button is-primary is-fullwidth">  
                         @lang('orderProducts.buttons.agregar') </button>  
-                </botton-component>  
-
+                </component-component>  
+            </td>
+            <td>
                 <botton-component>
                     @csrf
                     @method('DELETE')
                     <button v-on:click="$emit('botton-item', { route: '{{ route('orderProducts.destroy', $orderProduct ) }}' })" class="button is-danger"> @lang('orderProducts.buttons.delete') </button>  
                 </botton-component>   
-                
-                  
             </td>
+              
         </tr>
     @endforeach
     </tbody>

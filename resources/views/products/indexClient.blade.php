@@ -27,12 +27,12 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->quantity }}</td>
             <td><img src="{{ $product->image }}" width="60" height="60" /></td>
-            <td> <form action="{{ route('products.addProductOrder', $product) }}" method="post">
+            <td> 
+                <botton-component>
                     @csrf
-                    <button class="button is-primary is-fullwidth" type="submit" ><em class="fas fa-save mr-2"></em>
-                            @lang('products.buttons.agregar')
-                    </button>
-            </from>
+                    <button v-on:click="$emit('botton-item', { route: '{{ route('products.addProductOrder', $product) }}' })" class="button is-primary is-fullwidth">  
+                        @lang('products.buttons.agregar') </button>  
+                </component-component> 
             </td>
         </tr>
     @endforeach
