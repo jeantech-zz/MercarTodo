@@ -34,4 +34,6 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::put('/users/disable/{user}', [UserController::class, 'disable'])->name('users.disable');
     Route::GET('products/indexClient',[ProductController::class,'indexClient'])->name('products.indexClient');
 
+    Route::post('/products/addProductOrder/{product}', [ProductController::class, 'addProductOrder'])->name('products.addProductOrder');
+
 });

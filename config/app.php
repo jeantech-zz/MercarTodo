@@ -238,5 +238,8 @@ return [
     ],
 
     'urlProduct' => env('URL_PRODUCT', 'public/products'),
+    'statusOrderInprocess' => env('STATUS_ORDER_INPROCESS', 'INPROCESS'),
+    'currency' => env('CURRENCY', 'COP'),
+    
 
 ];

@@ -27,6 +27,13 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->quantity }}</td>
             <td><img src="{{ $product->image }}" width="60" height="60" /></td>
+            <td> <form action="{{ route('products.addProductOrder', $product) }}" method="post">
+                    @csrf
+                    <button class="button is-primary is-fullwidth" type="submit" ><em class="fas fa-save mr-2"></em>
+                            @lang('products.buttons.agregar')
+                    </button>
+            </from>
+            </td>
         </tr>
     @endforeach
     </tbody>
