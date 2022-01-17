@@ -29,9 +29,10 @@
             <td>{{ $order->currency }}</td>
             <td>{{ $order->status }}</td>
             <td class="has-text-centered">
-               <a href="">
+               <a href="{{ route('ordersProducts.index') }}">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                 </a>
+                
                 <botton-component>
                     @csrf
                     @method('DELETE')
