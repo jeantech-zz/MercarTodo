@@ -32,7 +32,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::Resource('users', UserController::class)->only(['index','create','store','edit','update']);
     Route::Resource('products', ProductController::class)->only(['index','create','store','edit', 'update','destroy']);
     Route::Resource('orders', OrderController::class)->only(['index','destroy']);
-    Route::Resource('ordersProducts', OrderProductController::class)->only(['index']);
+    Route::Resource('orderProducts', OrderProductController::class)->only(['index','destroy']);
     
     Route::put('/products/disable/{product}', [ProductController::class, 'disable'])->name('products.disable');
     Route::put('/users/disable/{user}', [UserController::class, 'disable'])->name('users.disable');

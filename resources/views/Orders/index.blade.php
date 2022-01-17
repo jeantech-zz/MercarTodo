@@ -29,7 +29,7 @@
             <td>{{ $order->currency }}</td>
             <td>{{ $order->status }}</td>
             <td class="has-text-centered">
-               <a href="{{ route('ordersProducts.index') }}">
+               <a href="{{ route('orderProducts.index') }}">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                 </a>
                 

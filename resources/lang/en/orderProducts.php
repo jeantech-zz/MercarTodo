@@ -17,7 +17,7 @@ return [
     'buttons' => [
         'save' => 'Create Order',
         'cancel' => 'Cancel Order',
-        'delete' => 'Delete Order'
+        'delete' => 'Delete'
     ],
     'message' => [
         'success' => 'created successfully.',

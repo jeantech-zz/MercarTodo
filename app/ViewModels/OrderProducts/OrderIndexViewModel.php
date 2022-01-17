@@ -18,7 +18,7 @@ class OrderIndexViewModel extends ViewModel
 
     protected function title(): string
     {
-        return trans('orderPrducts.titles.index');
+        return trans('orderProducts.titles.index');
     }
 
     protected function filters(): array
@@ -30,7 +30,7 @@ class OrderIndexViewModel extends ViewModel
 
     protected function headers(): array
     {
-       return array_merge(trans('orderPrducts.fields'), parent::headers());
+       return array_merge(trans('orderProducts.fields'), parent::headers());
     }
 
     protected function data(): array

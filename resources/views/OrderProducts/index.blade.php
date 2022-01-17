@@ -28,7 +28,14 @@
             <td class="has-text-centered">
                <a href="">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
-                </a>                    
+                </a>    
+                <botton-component>
+                    @csrf
+                    @method('DELETE')
+                    <button v-on:click="$emit('botton-item', { route: '{{ route('orderProducts.destroy', $orderProduct ) }}' })" class="button is-danger"> @lang('orderProducts.buttons.delete') </button>  
+                </botton-component>   
+                
+                  
             </td>
         </tr>
     @endforeach
