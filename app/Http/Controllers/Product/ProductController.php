@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    private GameRepositories $gameRepositories;
      /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */

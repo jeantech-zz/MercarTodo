@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@extends('layouts.admin')
+@extends('layouts.client')
 @section('content')
 
 <table class="table is-narrow is-hoverable is-fullwidth">
