@@ -12,7 +12,10 @@ class OrderIndexViewModel extends ViewModel
     protected function buttons(): array
     {
         return [
-            
+            'back' => [
+                'text' => trans('orders.titles.index'),
+                'route' => route('orders.index'),
+            ],
         ];
     }
 

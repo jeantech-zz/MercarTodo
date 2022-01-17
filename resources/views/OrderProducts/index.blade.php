@@ -25,16 +25,14 @@
             <td>{{ $orderProduct->quantity }}</td>
             <td>{{ $orderProduct->amount }}</td>
             <td>{{ $orderProduct->order_id }}</td>
-            <td class="has-text-centered">
-               <a href="">
-                        <b-icon size="is-small" type="is-info" icon="pencil"/>
-                </a>    
-                <form action="{{ route('orderProducts.addProductOrder', $orderProduct) }}" method="post">
+            <td class="has-text-centered">    
+                
+                <botton-component>
                     @csrf
-                    <button class="button is-primary is-fullwidth" type="submit" ><em class="fas fa-save mr-2"></em>
-                            @lang('orderProducts.buttons.agregar')
-                    </button>
-                </from>
+                    <button v-on:click="$emit('botton-item', { route: '{{ route('orderProducts.addProductOrder', $orderProduct) }}' })" class="button is-primary is-fullwidth">  
+                        @lang('orderProducts.buttons.agregar') </button>  
+                </botton-component>  
+
                 <botton-component>
                     @csrf
                     @method('DELETE')
