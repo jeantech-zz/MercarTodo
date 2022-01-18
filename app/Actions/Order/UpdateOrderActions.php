@@ -43,10 +43,10 @@ class UpdateOrderActions
                 $dataRecor['currency']  = $orderRecord->currency;
             }
 
-            $dataRecor['total']  =totalOrderProduct;
+            $dataRecor['total']  = $totalOrderProduct;
 
         }else{
-            $dataRecor = [ 
+            $dataRecord = [ 
                 'customer_name' =>  $orderRecord->customer_name,
                 'customer_email' => $orderRecord->customer_email,
                 'customer_mobile' => $orderRecord->customer_mobile,
