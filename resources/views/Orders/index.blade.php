@@ -32,12 +32,18 @@
                <a href="{{ route('orderProducts.index') }}">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                 </a>
-                
                 <botton-component>
                     @csrf
                     @method('DELETE')
                     <button v-on:click="$emit('botton-item', { route: '{{ route('orders.destroy', $order ) }}' })" class="button is-danger"> @lang('orders.buttons.delete') </button>  
                 </botton-component> 
+                <form action="{{ route('orders.showPay', $order) }}" method="post">
+                    @csrf
+                    @method('GET')
+                    <button class="button is-primary is-fullwidth" type="submit" ><em class="fas fa-save mr-2"></em>
+                            @lang('orders.buttons.pay')
+                    </button>
+                </from>
             </td>
         </tr>
     @endforeach

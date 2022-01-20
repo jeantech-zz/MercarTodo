@@ -239,6 +239,9 @@ return [
 
     'urlProduct' => env('URL_PRODUCT', 'public/products'),
     'statusOrderInprocess' => env('STATUS_ORDER_INPROCESS', 'INPROCESS'),
+    'statusOrderInprocessPay' => env('STATUS_ORDER_INPROCESSPAY', 'INPROCESSPAY'),
+    'statusOrderPayRejected' => env('STATUS_ORDER_INPROCESS', 'REJECTED'),
+    'statusOrderPaySuccess' => env('STATUS_ORDER_INPROCESS', 'SUCCESS'),
     'currency' => env('CURRENCY', 'COP'),
 
     'urlPlacetoPay' => env('URL_PLACETOPAY' , 'https://dev.placetopay.com/redirection/api/session'),

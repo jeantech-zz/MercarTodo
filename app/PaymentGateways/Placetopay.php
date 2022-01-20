@@ -13,7 +13,6 @@ class Placetopay implements PaymentGatewayContract
      * @string
      */
 
-    private $returnUrl;
     private $ipAddress;
     private $userAgent;
     private $url;
@@ -24,22 +23,20 @@ class Placetopay implements PaymentGatewayContract
 
     public function __construct()
     {
-        $this->returnUrl = config('app.urlReturntPlacetoPay');
         $this->ipAddress = config('app.ipAddressPlacetoPay');
         $this->userAgent = config('app.userAgentPlacetoPay');
         $this->url = config('app.urlPlacetoPay');
         $this->currency = config('app.currency');
         $this->loginPlacetoPay = config('app.loginPlacetoPay');
-        $this->descriptionPlacetoPay = config('app.descriptionPlacetoPay');
     }
 
-    public function createSession ()
+    public function createSession (array $dataPay)
     {
-        $request = $this->makeRequest();
+        $request = $this->makeRequest($dataPay);
 
         $response = Http::post($this->url, $request);
 
-        dd($request, $response->body());
+       return json_decode($response->body(), true);
     }
 
     public function getSession()
@@ -47,11 +44,11 @@ class Placetopay implements PaymentGatewayContract
         
     }
 
-    private function makeRequest(): array
+    private function makeRequest(array $data): array
     {
         $auth = $this->makeAuth();
-        $payment = $this->makePayment();
-        $extraAttributes = $this->extraAttributes();
+        $payment = $this->makePayment($data);
+        $extraAttributes = $this->extraAttributes($data);
 
         return [
             "auth" => $auth,
@@ -74,27 +71,24 @@ class Placetopay implements PaymentGatewayContract
         ];
     }
 
-    private function makePayment(): array
-    {
-
+    private function makePayment(array $data): array
+    {        
         return [
-                'reference' =>  '5976030f5575d',
-                'description' =>  $this->descriptionPlacetoPay,
+                'reference' =>  $data['reference'],
+                'description' =>  $data['description'],
                 'amount' =>   [ 
-                    'currency' => $this->currency,
-                    'total' =>  50000
+                    'currency' => $data['currency'],
+                    'total' =>  $data['total']
                 ],
                 'allowPartial' => false
             ];
     }
 
-    private function extraAttributes(): array
+    private function extraAttributes(array $data): array
     {
-        //array $data
-        $urlReturn = $this->returnUrl . '/'.$data['id'];
         return [
             'expiration' => Carbon::now(new DateTimeZone('America/Bogota'))->addHour()->toIso8601String(),  
-            'returnUrl' => $this->returnUrl,
+            'returnUrl' => $data['returnUrl'],
             'ipAddress' =>  $this->ipAddress,
             'userAgent' => $this->userAgent
         ];

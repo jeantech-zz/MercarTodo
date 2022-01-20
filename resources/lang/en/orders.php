@@ -4,6 +4,7 @@ return [
     'titles' => [
         'index' => 'Order',
         'edit' => 'Edit Order',
+        'pay'  => 'Pay Order',
     ],
     'navbar' => [
         'title' => 'Order',
@@ -20,7 +21,8 @@ return [
     'buttons' => [
         'save' => 'Create Order',
         'cancel' => 'Cancel Order',
-        'delete' => 'Delete Order'
+        'delete' => 'Delete Order',
+        'pay' => 'Pay'
     ],
     'message' => [
         'success' => 'created successfully.',
@@ -28,9 +30,9 @@ return [
     'labels' => [
         'multiple' => 'Find Order',
         'user_id' => 'User id', 
-        'customer_name' => 'Name',
-        'customer_email' => 'Email',
-        'customer_mobile' => 'Mobil',
+        'customer_name' => 'Name Customer',
+        'customer_email' => 'Email Customer',
+        'customer_mobile' => 'Mobil Customer',
         'total' => 'total',    
         'currency' => 'Currency',
         'status' => 'Status',    

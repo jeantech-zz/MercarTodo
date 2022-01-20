@@ -9,60 +9,68 @@ class UpdateOrderActions
 {
     public static function execute(Order $order, array $data = [] ): bool
     {
-      
+
+       
         $orderRecord = Order::find($order->id);
 
         $orderProduct = OrderProduct::Where('order_id', $order->id )->get();
         $totalOrderProduct = $orderProduct->sum('amount');
         
 
-        $dataRecor = [];
+        $dataRecord = [];
 
         if ($data <> null ){
             if ($data['customer_name'] <>   $orderRecord->customer_name ){
-                $dataRecor['customer_name']  = $data['customer_name'];
+                $dataRecord['customer_name']  = $data['customer_name'];
             }else{
-                $dataRecor['customer_name']  = $orderRecord->customer_name;
+                $dataRecord['customer_name']  = $orderRecord->customer_name;
             }
 
             if ($data['customer_email'] <>   $orderRecord->customer_email){
-                $dataRecor['customer_email']  = $data['customer_email'];
+                $dataRecord['customer_email']  = $data['customer_email'];
             }else{
-                $dataRecor['customer_email']  = $orderRecord->customer_email;
+                $dataRecord['customer_email']  = $orderRecord->customer_email;
             }
 
             if ($data['customer_mobile'] <>   $orderRecord->customer_mobile){
-                $dataRecor['customer_mobile']  = $data['customer_mobile'];
+                $dataRecord['customer_mobile']  = $data['customer_mobile'];
             }else{
-                $dataRecor['customer_mobile']  = $orderRecord->customer_mobile;
+                $dataRecord['customer_mobile']  = $orderRecord->customer_mobile;
             }
 
             if ($data['currency'] <>   $orderRecord->customcurrencyer_name){
-                $dataRecor['currency']  = $data['currency'];
+                $dataRecord['currency']  = $data['currency'];
             }else{
-                $dataRecor['currency']  = $orderRecord->currency;
+                $dataRecord['currency']  = $orderRecord->currency;
             }
 
-            $dataRecor['total']  = $totalOrderProduct;
+            if ($data['status'] <>   $orderRecord->customcurrencyer_name){
+                $dataRecord['status']  = $data['status'];
+            }else{
+                $dataRecord['status']  = $orderRecord->currency;
+            }
+            
+            $dataRecord['total']  = $totalOrderProduct;
 
         }else{
             $dataRecord = [ 
-                'customer_name' =>  $orderRecord->customer_name,
-                'customer_email' => $orderRecord->customer_email,
-                'customer_mobile' => $orderRecord->customer_mobile,
+                'customer_name' =>  $order->customer_name,
+                'customer_email' => $order->customer_email,
+                'customer_mobile' => $order->customer_mobile,
                 'total' =>  $totalOrderProduct,
-                'currency' => $orderRecord->currency,
-                'status' => $orderRecord->status,
+                'currency' => $order->currency,
+                'status' => $order->status,
             ];
+            
         }
      
         $record = $orderRecord->update([ 
-            'customer_name' =>  $dataRecor['customer_name'],
-            'customer_email' => $dataRecor['customer_email'],
-            'customer_mobile' => $dataRecor['customer_mobile'],
-            'total' =>  $dataRecor['total'],
-            'currency' => $dataRecor['currency'],
-            'status' => $dataRecor['status'],
+            'customer_name' =>  $dataRecord['customer_name'],
+            'customer_email' => $dataRecord['customer_email'],
+            'customer_mobile' => $dataRecord['customer_mobile'],
+            'total' =>  $dataRecord['total'],
+            'currency' => $dataRecord['currency'],
+            'status' => $dataRecord['status'],
         ]);
 
         return $record;

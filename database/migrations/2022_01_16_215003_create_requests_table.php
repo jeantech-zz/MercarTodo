@@ -18,12 +18,10 @@ class CreateRequestsTable extends Migration
             $table->foreignId('order_id')->constrained('orders');
             $table->string('reference')->nullable();  
             $table->string('description', 100);
-            $table->string('currency', 100);
-            $table->unsignedInteger('total');
-            $table->timestamp('expiration');
-            $table->string('retrunrUrl', 100);
-            $table->string('ipAddress', 100);
-            $table->string('response', 250); 
+            $table->string('returnUrl', 100);
+            $table->json('response', 250);
+            $table->string('processUrl', 250)->nullable();
+             
             $table->timestamps();
         });
     }

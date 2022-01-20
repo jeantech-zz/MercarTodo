@@ -36,9 +36,14 @@ Route::middleware(['auth','verified'])->group(function () {
     
     Route::put('/products/disable/{product}', [ProductController::class, 'disable'])->name('products.disable');
     Route::put('/users/disable/{user}', [UserController::class, 'disable'])->name('users.disable');
-    Route::GET('products/indexClient',[ProductController::class,'indexClient'])->name('products.indexClient');
+    Route::get('products/indexClient',[ProductController::class,'indexClient'])->name('products.indexClient');
 
     Route::post('/products/addProductOrder/{product}', [ProductController::class, 'addProductOrder'])->name('products.addProductOrder');
     Route::post('/orderProducts/addProductOrder/{orderProduct}', [OrderProductController::class, 'addProductOrder'])->name('orderProducts.addProductOrder');
 
+    Route::put('/orders/orderPay/{order}', [OrderController::class, 'orderPay'])->name('orders.orderPay');
+    Route::get('/orders/{order}', [OrderController::class, 'showPay'])->name('orders.showPay');
+
+    Route::get('payments/storePay',[OrderController::class, 'storePay']);
+    
 });
