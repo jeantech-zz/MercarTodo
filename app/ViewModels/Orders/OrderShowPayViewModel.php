@@ -33,6 +33,10 @@ class OrderShowPayViewModel extends OrderCreateViewModel
         return trans('orders.titles.pay');
     }
 
+    protected function message(): string
+    {
+        return trans('orders.titles.pay');
+    }
     /**
      * @return Input[]
      */
@@ -56,7 +60,7 @@ class OrderShowPayViewModel extends OrderCreateViewModel
                 trans('orders.inputs.customer_name'),
                 trans('orders.placeholders.customer_name'),  
                 trans('orders.message_error.customer_name'),          
-                false               
+                false          
             ), 
             new TextInput(
                 trans('orders.labels.customer_email'),
@@ -77,21 +81,24 @@ class OrderShowPayViewModel extends OrderCreateViewModel
                 trans('orders.inputs.total'),
                 trans('orders.placeholders.total'),
                 trans('orders.message_error.total'),
-                true
+                true,
+                'disabled'    
             ), 
             new TextInput(
                 trans('orders.labels.currency'),
                 trans('orders.inputs.currency'),
                 trans('orders.placeholders.currency'),
                 trans('orders.message_error.currency'),
-                true
+                true,
+                'disabled'    
             ), 
             new TextInput(
                 trans('orders.labels.status'),
                 trans('orders.inputs.status'),
                 trans('orders.placeholders.status'),  
                 trans('orders.message_error.status'),          
-                true               
+                true,
+                'disabled'                   
             ),                                   
         ];
     }

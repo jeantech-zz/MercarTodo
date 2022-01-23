@@ -15,6 +15,7 @@ abstract class ViewModel implements Arrayable
             'filters' => $this->filters(),
             'fields' => $this->inputs(),
             'headers' => $this->headers(),
+            
         ] + $this->data();
     }
 
@@ -24,7 +25,6 @@ abstract class ViewModel implements Arrayable
             'title' => $this->title(),
         ];
     }
-
     protected function filters(): array
     {
         return [];
@@ -42,7 +42,7 @@ abstract class ViewModel implements Arrayable
 
     protected function data(): array
     {
-        return [gg];
+        return [];
     }
 
     /**

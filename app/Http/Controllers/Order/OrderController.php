@@ -95,9 +95,7 @@ class OrderController extends Controller
 
     public function showPay(Order $order,  OrderShowPayViewModel $viewModel)
     {
-        //dd( $order);
-        return view('layouts.edit', $viewModel->model($order));
-        //return view('layouts.create', $viewModel);
+        return view('layouts.showClient', $viewModel->model($order));
     }
 
     private function makePay (array $data): array
