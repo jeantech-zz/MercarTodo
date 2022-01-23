@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Actions\Order\UpdateOrderActions;
+use App\Actions\Order\DeleteOrderActions;
 use App\Actions\Request\StoreRequestActions;
+use App\Actions\Order\UpdateOrderActions;
+use App\Http\Requests\Order\UpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\IndexRequest;
 use App\Models\Order;
+use App\PaymentGateways\PaymentGatewayContract;
+use App\Repositories\Orders\ColeccionsOrdersRepositories;
 use App\ViewModels\Orders\OrderIndexViewModel;
 use App\ViewModels\Orders\OrderShowPayViewModel;
-use App\Actions\Order\DeleteOrderActions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Http\Requests\Order\UpdateRequest;
-use App\PaymentGateways\PaymentGatewayContract;
+
 
 
 class OrderController extends Controller
@@ -29,6 +31,7 @@ class OrderController extends Controller
     private $statusOrderPayRejected;
     private $statusOrderPaySuccess;
     private $statusOrderInprocessPay;
+    private ColeccionsOrdersRepositories $coleccionOrders;
 
     public function __construct()
     {
@@ -37,6 +40,8 @@ class OrderController extends Controller
         $this->url = config('app.url');
         $this->statusOrderPayRejected = config('app.statusOrderPayRejected');
         $this->statusOrderInprocessPay = config('app.statusOrderInprocessPay');
+
+        $this->coleccionOrders = new ColeccionsOrdersRepositories;
     }
       /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
@@ -60,21 +65,23 @@ class OrderController extends Controller
     public function storePay(PaymentGatewayContract $paymentGeteway)
     {
         $response = $paymentGeteway->createSession();
-        // response()->json($paymentGeteway->createSession());
-      $processUrl=  $response['processUrl'];
-      //  dd($response, $processUrl);
+        $processUrl=  $response['processUrl'];
+     
         return redirect()->away($processUrl);
     }
 
     public function orderPay(Order $order, UpdateRequest $request, PaymentGatewayContract $paymentGeteway)
     {        
-        $arrayPay = $this->makePay( $request->validated());
-        $response = $paymentGeteway->createSession($arrayPay);
+        $orderRequest =$this->coleccionOrders->requestOrder($order->id);
 
-        $status = $this->statusOrderInprocessPay;
-        $dataOrder = $request->validated();
-        $dataOrder['status'] = $status;
-        $result = $this->updateOrder($order, $dataOrder);
+        if($orderRequest==null || $orderRequest->requestId==null   ){
+            return $this->proccessPay($order, $request, $paymentGeteway);
+        }
+    }
+
+    public function proccessPay(Order $order, UpdateRequest $request, PaymentGatewayContract $paymentGeteway){
+        $arrayPay = $this->makePay($request->validated());
+        $response = $paymentGeteway->createSession($arrayPay);
         
         $dataRequest = [
             "order" => $request->validated(),
@@ -83,14 +90,24 @@ class OrderController extends Controller
         $this->createRequestOrderPay($dataRequest);
  
         if ($response['status']['status'] == 'OK'){
-            return redirect()->away($response['processUrl']);
-           
-            $orderUpdate = UpdateOrderActions::execute($order, $request->validated());
-        }else{
-            $message = $response['status']['message'];
-            return redirect()->route('orders.showPay', $order)->with('success', 'Order Delete successfully.');
-        }
 
+            $status = $this->statusOrderInprocessPay;
+            $dataOrder = $request->validated();
+            $dataOrder['status'] = $status;
+            $result = $this->updateOrder($order, $dataOrder);
+
+            return redirect()->away($response['processUrl']);
+                       
+        }else{
+            $status = $this->statusOrderPayRejected;
+    
+            $dataOrder = $request->validated();
+            $dataOrder['status'] = $status;
+            $result = $this->updateOrder($order, $dataOrder);
+            
+            $message = $response['status']['message'];
+            return redirect()->route('orders.showPay', $order)->with('success', 'Order Reject successfully.');
+        }
     }
 
     public function showPay(Order $order,  OrderShowPayViewModel $viewModel)
@@ -103,7 +120,7 @@ class OrderController extends Controller
         return  [
             'reference' => $data['id'],
             'total' => $data['total'],
-            'returnUrl' =>  $this->url.$this->returnUrl.'/'.$data['id'], 
+            'returnUrl' => $this->returnUrl.'/'.$data['id'], 
             'description' => $this->descriptionPlacetoPay .' '.$data['id'], 
             'currency' => $data['currency'] 
         ];
@@ -117,19 +134,21 @@ class OrderController extends Controller
     
     private function createRequestOrderPay (array $data)                        
     {
-      
         $processUrl = null;
+        $requestId = null;
        if(isset($data['responsePay']['processUrl'])) {
            $processUrl = $data['responsePay']['processUrl'];
+           $requestId = $data['responsePay']['requestId'];
        }
 
         $dataRequest = [
             'order_id' =>  $data['order']['id'],
             'reference' =>  $data['order']['id'],
-            'description' => $this->url.$this->returnUrl.'/'.$data['order']['id'],
+            'description' => $this->returnUrl.'/'.$data['order']['id'],
             'returnUrl' => $this->descriptionPlacetoPay .' '.$data['order']['id'],
             'response' =>  json_encode($data['responsePay']) ,
             'processUrl' => $processUrl,
+            'requestId' => $requestId,
         ];
         $createRequest = StoreRequestActions::execute($dataRequest);
 

@@ -240,7 +240,7 @@ return [
     'urlProduct' => env('URL_PRODUCT', 'public/products'),
     'statusOrderInprocess' => env('STATUS_ORDER_INPROCESS', 'INPROCESS'),
     'statusOrderInprocessPay' => env('STATUS_ORDER_INPROCESSPAY', 'INPROCESSPAY'),
-    'statusOrderPayRejected' => env('STATUS_ORDER_INPROCESS', 'REJECTED'),
+    'statusOrderPayRejected' => env('STATUS_ORDER_REJECTED', 'REJECTED'),
     'statusOrderPaySuccess' => env('STATUS_ORDER_INPROCESS', 'SUCCESS'),
     'currency' => env('CURRENCY', 'COP'),
 

@@ -20,8 +20,8 @@ class CreateRequestsTable extends Migration
             $table->string('description', 100);
             $table->string('returnUrl', 100);
             $table->json('response', 250);
-            $table->string('processUrl', 250)->nullable();
-             
+            $table->string('requestId', 250)->nullable();
+            $table->string('processUrl', 250)->nullable();             
             $table->timestamps();
         });
     }
@@ -36,3 +36,4 @@ class CreateRequestsTable extends Migration
         Schema::dropIfExists('requests');
     }
 }
+

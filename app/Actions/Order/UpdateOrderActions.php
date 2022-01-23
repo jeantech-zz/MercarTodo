@@ -38,13 +38,13 @@ class UpdateOrderActions
                 $dataRecord['customer_mobile']  = $orderRecord->customer_mobile;
             }
 
-            if ($data['currency'] <>   $orderRecord->customcurrencyer_name){
+            if ($data['currency'] <>   $orderRecord->currency){
                 $dataRecord['currency']  = $data['currency'];
             }else{
                 $dataRecord['currency']  = $orderRecord->currency;
             }
 
-            if ($data['status'] <>   $orderRecord->customcurrencyer_name){
+            if ($data['status'] <>   $orderRecord->status){
                 $dataRecord['status']  = $data['status'];
             }else{
                 $dataRecord['status']  = $orderRecord->currency;

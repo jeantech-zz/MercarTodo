@@ -18,9 +18,9 @@ class UpdateRequest extends FormRequest
             'customer_name' => [ 'string'],
             'customer_email' => [ 'string'],
             'customer_mobile' => [ 'string'],
-            'total'   =>  [ 'required'  ],
-            'currency' => [ 'required' ],
-            'status' => [ 'required' ],
+            'total'   =>  [ 'string'  ],
+            'currency' => [ 'string' ],
+            'status' => [ 'string' ],
          ];
     }
 }

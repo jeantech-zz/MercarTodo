@@ -15,11 +15,14 @@ class StoreRequestActions
                 'description' => $data['description'],
                 
                 'response' => $data['response'],
-                'processUrl' => $data['processUrl']
+                'processUrl' => $data['processUrl'],
+                'requestId' => $data['requestId']
+                
             ]);
 
         return  $request;
        
     }
 }
+
 

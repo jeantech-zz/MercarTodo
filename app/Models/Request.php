@@ -15,6 +15,7 @@ class Request extends Model
     'description',
     'returnUrl' ,
     'response', 
-    'processUrl'
+    'processUrl',
+    'requestId'
     ];
 }
