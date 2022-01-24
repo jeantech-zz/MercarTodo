@@ -57,7 +57,5 @@ class AuthenticationTest extends TestCase
         $response = $this->post('/login', ['email' =>  $user->email(), 'password' => 'password' ]);
 
         $this->assertNull(Auth::user());
-        //$response->assertSessionHasErrors('email');
-       // $response->assertSee(trans('auth.user_blocked'));
     }
 }

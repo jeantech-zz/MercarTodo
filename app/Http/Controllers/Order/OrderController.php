@@ -62,15 +62,8 @@ class OrderController extends Controller
     
     }
 
-    public function storePay(PaymentGatewayContract $paymentGeteway)
-    {
-        $response = $paymentGeteway->createSession();
-        $processUrl=  $response['processUrl'];
-     
-        return redirect()->away($processUrl);
-    }
 
-    public function orderPay(Order $order, UpdateRequest $request, PaymentGatewayContract $paymentGeteway)
+    public function orderPay(Order $order, UpdateRequest $request, PaymentGatewayContract $paymentGeteway): RedirectResponse
     {        
         $orderRequest =$this->coleccionOrders->requestOrder($order->id);
 
@@ -79,7 +72,8 @@ class OrderController extends Controller
         }
     }
 
-    public function proccessPay(Order $order, UpdateRequest $request, PaymentGatewayContract $paymentGeteway){
+    public function proccessPay(Order $order, UpdateRequest $request, PaymentGatewayContract $paymentGeteway): RedirectResponse
+    {
         $arrayPay = $this->makePay($request->validated());
         $response = $paymentGeteway->createSession($arrayPay);
         
@@ -110,7 +104,7 @@ class OrderController extends Controller
         }
     }
 
-    public function showPay(Order $order,  OrderShowPayViewModel $viewModel)
+    public function showPay(Order $order,  OrderShowPayViewModel $viewModel): View
     {
         return view('layouts.showClient', $viewModel->model($order));
     }
@@ -132,7 +126,7 @@ class OrderController extends Controller
         return $orderUpdate;
     }
     
-    private function createRequestOrderPay (array $data)                        
+    private function createRequestOrderPay (array $data)                    
     {
         $processUrl = null;
         $requestId = null;
