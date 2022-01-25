@@ -21,11 +21,11 @@
     <tbody>
     @foreach($orderProducts as $orderProduct)
         <tr>
-            <td>{{ $orderProduct->product_id }}</td>
+            <td><img src="{{ $orderProduct->products_image  }}" width="60" height="60" /></td>
+            <td>{{ $orderProduct->products_name }}</td>
             <td>{{ $orderProduct->quantity }}</td>
             <td>{{ $orderProduct->amount }}</td>
-            <td>{{ $orderProduct->order_id }}</td>  
-            
+            <td>{{ $orderProduct->order_id }}</td>              
             <td>
                 <botton-component>
                     @csrf

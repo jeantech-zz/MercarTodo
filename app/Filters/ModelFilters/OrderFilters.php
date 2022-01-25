@@ -16,7 +16,9 @@ class OrderFilters extends Filter
 
     protected function select(): Filter
     {
-        $this->query->select(['id','user_id', 'customer_name','customer_email','customer_mobile','total', 'currency', 'status']);
+        $this->query->select(['orders.id','user_id','users.name as user_name','customer_name','customer_email','customer_mobile','total', 'currency', 'status'])
+        ->join('users', 'users.id', '=', 'orders.user_id')
+        ->where('user_id', auth()->user()->id);
         return $this;
     }
 }

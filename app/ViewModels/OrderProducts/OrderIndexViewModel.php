@@ -27,7 +27,7 @@ class OrderIndexViewModel extends ViewModel
     protected function filters(): array
     {
         return [
-            'customer_name' => old('filters.customer_name') ?? request()->input('filters.customer_name'),
+            'order_id' => old('filters.order_id') ?? request()->input('filters.order_id'),
         ];
     }
 

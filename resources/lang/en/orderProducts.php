@@ -9,7 +9,8 @@ return [
         'title' => 'Order',
     ],
     'fields' => [
-        'product_id' => 'Product id', 
+        'product_image' => 'Product Image', 
+        'product_id' => 'Product', 
         'quantity' => 'Quantity',
         'amount' => 'Amount',
         'order_id' => 'Order',
