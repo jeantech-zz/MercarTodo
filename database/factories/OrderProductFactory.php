@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderProductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    
+    public function definition(): array
     {
         return [
-            //
+            'product_id' => $this->faker->randomElement([1, 2]),
+            'quantity' => $this->faker->numberBetween($min = 3100000, $max = 3150000),
+            'amount' => $this->faker->numberBetween($min = 3100000, $max = 3150000),
+            'order_id' => $this->faker->randomElement([1, 2]),
         ];
     }
 }
