@@ -46,7 +46,7 @@ class CreateUserTest extends TestCase
     /**
      * @dataProvider invalidDataProvider
      */
-    /*
+    
     public function test_it_validate_request_data_user(string $name, string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address, string $field): void
     {
         $this->withoutExceptionHandling();
@@ -63,12 +63,12 @@ class CreateUserTest extends TestCase
      /**
      * @dataProvider userProvider
      */
-    /*
+    
     public function test_email_is_unique_user(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address): void
     {
         $user= User::factory()->create(compact('name','email','password', 'phone_number', 'address'));
         $this->test_it_validate_request_data_user($name, $email, $password, $password_confirmation, $phone_number, $address, 'email');
-    }*/
+    }
 
 
     public function invalidDataProvider(): array

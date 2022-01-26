@@ -81,12 +81,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return  (bool) $this->disabled_at;
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class,'rol_id');
     }
 
-    public function isClient(){
-        if($this->role->name == 'Client'){
+    public function isClient():  bool
+    {
+      
+        if($this->role == null or $this->role->name == 'Client'){
             return true;
         }
         return false;
