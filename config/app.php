@@ -238,5 +238,17 @@ return [
     ],
 
     'urlProduct' => env('URL_PRODUCT', 'public/products'),
+    'statusOrderInprocess' => env('STATUS_ORDER_INPROCESS', 'INPROCESS'),
+    'statusOrderInprocessPay' => env('STATUS_ORDER_INPROCESSPAY', 'INPROCESSPAY'),
+    'statusOrderPayRejected' => env('STATUS_ORDER_REJECTED', 'REJECTED'),
+    'statusOrderPaySuccess' => env('STATUS_ORDER_INPROCESS', 'SUCCESS'),
+    'currency' => env('CURRENCY', 'COP'),
+
+    'urlPlacetoPay' => env('URL_PLACETOPAY' , 'https://dev.placetopay.com/redirection/api/session'),
+    'loginPlacetoPay' => env('LOGIN_PLACETOPAY' , '6dd490faf9cb87a9862245da41170ff2'),
+    'urlReturntPlacetoPay' => env('URL_RETURN_PLACETOPAY' , 'http://127.0.0.1:8000/orders'),
+    'ipAddressPlacetoPay' => env('IP_ADDRESS_PLACETOPAY' , '127.0.0.1'),
+    'userAgentPlacetoPay' => env('USER_AGENT_PLACETOPAY' , 'PlacetoPay Sandbox'),
+    'descriptionPlacetoPay' => env('DESCRIPTION_PLACETOPAY' , 'Pago Merca todo Correspiete a la orden No.'),
 
 ];

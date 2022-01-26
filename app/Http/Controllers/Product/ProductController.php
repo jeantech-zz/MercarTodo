@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Product;
 use App\Actions\Product\CreateActions;
 use App\Actions\Product\UpdateActions;
 use App\Actions\Product\DisableActions;
+use App\Actions\Order\StoreOrderActions;
+use App\Actions\Order\UpdateOrderActions;
+use App\Actions\OrderProduct\StoreUpdateOrderProductActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\IndexRequest;
 use App\Http\Requests\Product\CreateRequest;
@@ -22,7 +25,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    private GameRepositories $gameRepositories;
      /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
@@ -56,15 +58,12 @@ class ProductController extends Controller
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function store(CreateRequest $request): RedirectResponse
-    {
-  
+    {  
         $urlProduct = config('app.urlProduct');
-
         
         if(is_object($request->file('image'))) {
             $imagen = $request->file('image')->store($urlProduct);
             $url = Storage::url($imagen);
-          //  dd($request->file('image'), $urlProduct, $imagen, $url);
         }else{
             $url = $request->image;
         }
@@ -82,7 +81,6 @@ class ProductController extends Controller
 
     public function update (UpdateRequest $request): RedirectResponse
     {
-        //dd($request);
         $urlProduct = config('app.urlProduct');
 
         if(is_object($request->file('image'))) {
@@ -91,7 +89,6 @@ class ProductController extends Controller
         }else{
             $url = $request->image;
         }
-
 
         $product = UpdateActions::execute($request->validated(),  $url );
         return redirect()->route('products.index')->with('success', 'Product Update successfully.');
@@ -109,4 +106,17 @@ class ProductController extends Controller
         $product = DisableActions::execute($product);
         return redirect()->route('products.index')->with('success', 'Product Update successfully.');
     }
+
+    public function addProductOrder (Product $product): RedirectResponse
+    {
+        $order = StoreOrderActions::execute();
+
+        $orderProduct = StoreUpdateOrderProductActions::execute($order, $product);
+
+        $orderUpdate = UpdateOrderActions::execute($order);
+
+        return redirect()->route('products.indexClient')->with('success', 'Product Update successfully.');
+    }
+
+    
 }

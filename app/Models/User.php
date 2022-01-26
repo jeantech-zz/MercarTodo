@@ -55,11 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    /*public function email(): string
+    public function email(): string
     {
         return $this->attributes['email'];
         // strtolower( $this->email);
-    }*/
+    }
 
     public function emailLogin(): string
     {
@@ -71,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->attributes['password'];
     }
 
-    /*public function isEnabled(): bool
+    public function isEnabled(): bool
     {
         return ! (bool) $this->isDisabled();
     }
@@ -79,5 +79,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isDisabled(): bool
     {
         return  (bool) $this->disabled_at;
-    }*/
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class,'rol_id');
+    }
+
+    public function isClient():  bool
+    {
+      
+        if($this->role == null or $this->role->name == 'Client'){
+            return true;
+        }
+        return false;
+    }
 }

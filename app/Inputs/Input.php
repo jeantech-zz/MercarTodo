@@ -13,6 +13,7 @@ abstract class Input
         public string $placeholder = '',
         public string $message_error = '',
         public bool $required = false,
+        public string $disabled = '',
         public array $data = []        
     ) {
     }

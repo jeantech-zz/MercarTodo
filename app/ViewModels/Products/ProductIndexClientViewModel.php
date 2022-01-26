@@ -30,7 +30,7 @@ class ProductIndexClientViewModel extends ViewModel
 
     protected function headers(): array
     {
-       return trans('products.fields');
+        return array_merge(trans('products.fields'), parent::headers());
     }
 
     protected function data(): array

@@ -21,7 +21,8 @@ return [
         'save' => 'Create Product',
         'cancel' => 'Cancel Product',
         'delete' => 'Delete',
-        'disable' => 'Disable'
+        'disable' => 'Disable',
+        'agregar' => '+'
     ],
     'message' => [
         'success' => 'created successfully.',

@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;  
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\OrderProduct\OrderProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,19 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::Resource('users', UserController::class)->only(['index','create','store','edit','update']);
     Route::Resource('products', ProductController::class)->only(['index','create','store','edit', 'update','destroy']);
+    Route::Resource('orders', OrderController::class)->only(['index','destroy']);
+    Route::Resource('orderProducts', OrderProductController::class)->only(['index','destroy']);
     
     Route::put('/products/disable/{product}', [ProductController::class, 'disable'])->name('products.disable');
     Route::put('/users/disable/{user}', [UserController::class, 'disable'])->name('users.disable');
+    Route::get('products/indexClient',[ProductController::class,'indexClient'])->name('products.indexClient');
+
+    Route::post('/products/addProductOrder/{product}', [ProductController::class, 'addProductOrder'])->name('products.addProductOrder');
+    Route::post('/orderProducts/addProductOrder/{orderProduct}', [OrderProductController::class, 'addProductOrder'])->name('orderProducts.addProductOrder');
+
+    Route::put('/orders/orderPay/{order}', [OrderController::class, 'orderPay'])->name('orders.orderPay');
+    Route::get('/orders/{order}', [OrderController::class, 'showPay'])->name('orders.showPay');
+
+    Route::get('payments/storePay',[OrderController::class, 'storePay']);
+    
 });

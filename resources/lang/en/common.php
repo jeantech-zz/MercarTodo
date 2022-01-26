@@ -5,4 +5,5 @@ return [
     'save' => 'Save',
     'back' => 'Back',
     'actions' => 'Actions',
+    'pay' => 'Pay'
 ];

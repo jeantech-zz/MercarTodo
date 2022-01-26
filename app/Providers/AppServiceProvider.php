@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\PaymentGateways\PaymentGatewayContract;
+use App\PaymentGateways\Placetopay;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,13 +18,9 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    
+    public function boot(): void
     {
-        //
+        $this->app->bind(PaymentGatewayContract::class, Placetopay::class);
     }
 }

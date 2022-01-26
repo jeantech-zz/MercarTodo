@@ -21,21 +21,18 @@ export default {
     methods: {
         showConfirmationDialog () {
             this.$buefy.dialog.confirm({
-                title: 'Are you sure?',
-                message: 'This action cannot be undone',
+                title: 'Aggre this product',
+                message: 'You additial this product your order',
                 confirmText: 'Yes',
                 cancelText: 'No',
-                type: 'is-danger',
+                type: 'is-primary is-light',
                 hasIco: true,
                 onConfirm: () => this.bottonItem()
             })
         },
         bottonItem () {
             this.$refs.bottonForm.submit();
-        },
-         reverseMessages: function (){
-             this.message = this.message.split('').reverse()
-         }
+        }
     }
 }
 </script>

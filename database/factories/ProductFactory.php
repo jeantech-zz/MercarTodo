@@ -14,12 +14,13 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'code' => $this->faker->unique()->name(),
+            'code' => $this->faker->unique()->numberBetween($min = 11000, $max = 12000),
             'name' => $this->faker->name(),
             'description' => $this->faker->name(),
-            'price' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'quantity' => Str::random(10),
-            'image ' => Str::random(10),
+            'price' =>  $this->faker->numberBetween($min = 11000, $max = 2000000),
+            'quantity' =>  $this->faker->numberBetween($min = 1, $max = 20),
+            'disable_at' => $this->faker->randomElement([null, now()]),
+            'image' => '$this->faker->imageUrl(400, 240)',
         ];
     }
 }

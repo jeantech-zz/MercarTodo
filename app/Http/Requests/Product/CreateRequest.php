@@ -25,5 +25,6 @@ class CreateRequest extends FormRequest
             'quantity' => ['required',  'string' , 'max:255'],
             'image' => ['required', 'image','max:1024'   ],
          ];
+         //'image' => ['required', 'image','max:1024'   ],
     }
 }
